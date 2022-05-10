@@ -1,0 +1,45 @@
+<!DOCTYPEHTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF8">
+    <title>Hello</title>
+</head>
+<body>
+<h1>Chat</h1>
+<p th:text="${username}"></p>
+<div name="channelList">
+    <table>
+        <tbody>
+        <tr th:each="channel : ${channelList}">
+            <td th:text="${'#'+channel.getChannelName}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="addChannel">
+        <input type="text" name="channelName" placeholder="新しいチャネルを追加する">
+        <input type="submit" value="追加">
+    </form>
+</div>
+<div name="chat">
+    <label th:text="${'#'+currentChannelName}"></label>
+    <table>
+        <tbody>
+        <tr th:each="chat : ${chatList}">
+            <td th:text="${chat.getUser().getUserName() +  ' : ' + chat.getChat() +'  '+chat.getChattedTime()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form action="/add">
+    <input name="chat" placeholder="発言する" type="text">
+    <input type="submit" value="発言">
+</form>
+<!--<table>-->
+<!--    <tbody>-->
+<!--    <tr th:each="chat : ${chats}">-->
+<!--        <td th:text="${chat}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+</body>
+</html>
