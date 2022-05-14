@@ -13,7 +13,7 @@
     <form action="/selectChannel">
         <table>
             <tbody>
-            <tr th:each="channel : ${channelList.getChannelList}">
+            <tr th:each="channel : ${channelList}">
                 <td>
                     <input type="submit" th:value="${'#'+channel.getChannelName}" name="channelName">
                 </td>

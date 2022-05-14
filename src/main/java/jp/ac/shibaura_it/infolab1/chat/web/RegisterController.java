@@ -1,9 +1,9 @@
 package jp.ac.shibaura_it.infolab1.chat.web;
 
+import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
+import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
-import jp.ac.shibaura_it.infolab1.chat.service.LoginUserDetails;
-import jp.ac.shibaura_it.infolab1.chat.service.LoginUserDetailsService;
-import jp.ac.shibaura_it.infolab1.chat.service.UserService;
+import jp.ac.shibaura_it.infolab1.chat.service.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 public class RegisterController {
     @Autowired
     UserService userService;
+    @Autowired
+    ChannelService channelService;
+    @Autowired
+    ChatService chatService;
 
     @ModelAttribute
     RegisterForm setUpForm(){
@@ -37,7 +41,12 @@ public class RegisterController {
         }
         User user = new User();
         BeanUtils.copyProperties(form, user);
-        userService.register(user.getUsername(), user.getPassword());
+        user = userService.register(user.getUsername(), user.getPassword());
+
+        Channel channel = new Channel(null, "Private Channel", null, null);
+        Chat chat = new Chat(null, null, "ここはプライベートチャンネルです", null, null);
+        channelService.create(channel, user);
+        chatService.create(chat, channel, user);
 
         return "redirect:/login";
     }

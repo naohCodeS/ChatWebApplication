@@ -38,6 +38,7 @@ public class UserService {
     public User register(String username, String password){
         password = new Pbkdf2PasswordEncoder().encode(password);
         User user = new User(username, password, null, null);
+
         return userRepository.save(user);
     }
 
