@@ -1,9 +1,11 @@
 package jp.ac.shibaura_it.infolab1.chat.domainTest;
 
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
+import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.exception.user.InvalidPasswordException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
+import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class UserTest {
+public class domainTest {
     @Autowired
     UserService userService;
 
     @Autowired
     ChannelService channelService;
+
+    @Autowired
+    ChatService chatService;
 
     @Test
     void constructorTest() throws InvalidPasswordException {
@@ -55,7 +60,7 @@ public class UserTest {
 
     @Test
     void channelCreateTest(){
-        User user = new User("username", "password", null);
+        User user = new User("username", "password", null, null);
         userService.create(user);
         Channel channel = new Channel(null, "channelName", null, null);
         channelService.create(channel, user);
@@ -64,5 +69,22 @@ public class UserTest {
 
         assertThat(channel.getUsers().get(0)).isEqualTo(user);
         assertThat(user.getChannels().get(0)).isEqualTo(channel);
+    }
+
+    @Test
+    void chatCreateTest(){
+        User user = new User("username", "password", null, null);
+        Channel channel = new Channel("channel");
+        Chat chat = new Chat(null, null, "Hello, world!", null, null);
+
+        userService.create(user);
+        channelService.create(channel, user);
+        chatService.create(chat, channel, user);
+
+        assertThat(chatService.findAll().get(0)).isEqualTo(chat);
+
+//        System.out.println(userService.findAll());
+//        System.out.println(channelService.findAll());
+//        System.out.println(chatService.findAll());
     }
 }

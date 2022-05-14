@@ -34,6 +34,14 @@ public class User {
                 mappedBy = "users") //関連先でのプロパティ名
     private List<Channel> channels;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "user")
+    private List<Chat> chats;
+
     public User(String userName, String password) throws InvalidPasswordException {
         this.setAccountInfo(userName, password);
 //        this.currentChannel = new Channel("Private Channel");

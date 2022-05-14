@@ -5,6 +5,7 @@ import jp.ac.shibaura_it.infolab1.chat.exception.chat.ChatNullException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -16,28 +17,30 @@ import java.util.Calendar;
 @AllArgsConstructor
 public class Chat {
     @Id
-    @GeneratedValue
-    private Integer id;
-    @ManyToOne
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer chat_id;
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = true, name = "username")
     private User user;
-    @Column(nullable = false)
-    private String chat;
-    @Column(nullable = false)
+    private String chatText;
     private Calendar calendar;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL,
-               fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = true, name = "id")
     private Channel channel;
 
-    public Chat(User user, String chat) throws ChatNullException {
-        calendar = Calendar.getInstance();
-        this.setUser(user);
-        this.setChat(chat);
-    }
-    private void setChat(String chat) throws ChatNullException {
-        if(chat.isEmpty()) throw new ChatNullException("Chat is Null");
-        this.chat = chat;
-    }
+//    public Chat(User user, String chat) throws ChatNullException {
+//        calendar = Calendar.getInstance();
+//        this.setUser(user);
+//        this.setChat(chat);
+//    }
+//    private void setChat(String chat) throws ChatNullException {
+//        if(chat.isEmpty()) throw new ChatNullException("Chat is Null");
+//        this.chat = chat;
+//    }
 //    public String getChattedTime(){
 //        String month = String.valueOf(this.calendar.get(Calendar.MONTH) + 1);
 //        String day = String.valueOf(this.calendar.get(Calendar.DAY_OF_MONTH));

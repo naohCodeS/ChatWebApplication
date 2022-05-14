@@ -20,16 +20,15 @@ public class Channel {
     private String channelName;
     @JsonIgnore
     @ToString.Exclude
-    @ManyToMany(
-//            cascade = CascadeType.ALL,
-                fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(nullable = true, name = "username")
     private List<User> users;
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.EAGER,
+            mappedBy = "channel")
     private List<Chat> chats;
 
     public Channel(String channelName){
