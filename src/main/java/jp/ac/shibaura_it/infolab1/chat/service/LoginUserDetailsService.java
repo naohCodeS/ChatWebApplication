@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * ログイン時に認証ユーザをuserテーブルから取得するクラス
+ */
 @Service //DIにUserDetailsServiceは1つの時自動的にそのBeanが使われる
 public class LoginUserDetailsService implements UserDetailsService {
     @Autowired
@@ -16,8 +19,6 @@ public class LoginUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userTmp = new User();
-        userTmp.setUsername(username);
         User user = userRepository.findById(username).get();
         if(user == null){
             throw new UsernameNotFoundException("The requested user is not found");

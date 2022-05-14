@@ -67,7 +67,7 @@ public class User {
     @Override
     public boolean equals(Object obj){
         // なんで (User)obj.getPassword()が動くのかわからない。privateにしているのに...
-        return this.username.equals(((User)obj).getUsername()) && this.password.equals(((User)obj).getPassword());
+        return this.username.equals(((User)obj).getUsername());
 //        return this.userName.equals(((User)obj).getUserName());
     }
 //    @Override

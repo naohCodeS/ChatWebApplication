@@ -1,9 +1,13 @@
 package jp.ac.shibaura_it.infolab1.chat.service;
 
+import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
+import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
+import jp.ac.shibaura_it.infolab1.chat.exception.user.InvalidPasswordException;
 import jp.ac.shibaura_it.infolab1.chat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,17 +27,20 @@ public class UserService {
         return userRepository.findAll();
     }
     public User findOne(String username){
-        User user = new User();
-        user.setUsername(username);
-        return userRepository.findOne(Example.of(user)).get();
+        return userRepository.findById(username).get();
     }
-
     public User update(User user){
         return userRepository.save(user);
     }
     public void delete(String username){
-        userRepository.deleteAllById(Collections.singleton(username));
+        userRepository.deleteById(username);
     }
+    public User register(String username, String password){
+        password = new Pbkdf2PasswordEncoder().encode(password);
+        User user = new User(username, password, null, null);
+        return userRepository.save(user);
+    }
+
 
 //    public void registerUser(String userName, String password) throws InvalidPasswordException, UserNameDuplicateException {
 //        userRepository.;
