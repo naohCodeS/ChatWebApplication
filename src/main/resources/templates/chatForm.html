@@ -8,14 +8,12 @@
 <h1>Chat</h1>
 <p th:text="${username}"></p>
 <div name="channelList">
-
-
     <form action="/selectChannel">
         <table>
             <tbody>
             <tr th:each="channel : ${channelList}">
                 <td>
-                    <input type="submit" th:value="${'#'+channel.getChannelName}" name="channelName">
+                    <button type="submit" th:text="${'#'+channel.getChannelName}" name="channelName"></button>
                 </td>
             </tr>
             </tbody>

@@ -1,6 +1,7 @@
 package jp.ac.shibaura_it.infolab1.chat.web;
 
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
+import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
@@ -38,11 +39,28 @@ public class ChatController {
         return "redirect:/chatForm";
     }
 
-    @RequestMapping(value = "createChannel")
+    @PostMapping(value = "createChannel")
     String createChannel(@RequestParam("channelName")String channelName,
                          @AuthenticationPrincipal LoginUserDetails userDetails){
         Channel channel = new Channel(null, channelName, null, null);
         channelService.create(channel, userDetails.getUser());
+        return "redirect:/chat";
+    }
+
+    @PostMapping(value = "/selectChannel")
+    String selectChannel(){
+        return "redirect:/chat";
+    }
+
+    @PostMapping(value = "/add")
+    String addChat(@AuthenticationPrincipal LoginUserDetails userDetails,
+                   @RequestParam("chat")String chatText){
+        User user = userDetails.getUser();
+        Channel channel = user.getCurrentChannel();
+        Chat chat = new Chat(null, null, chatText, null, null);
+
+        chatService.create(chat, channel, user);
+
         return "redirect:/chat";
     }
 }

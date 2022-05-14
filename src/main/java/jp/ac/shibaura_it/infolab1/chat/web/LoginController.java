@@ -35,6 +35,5 @@ public class LoginController {
 
     @PostConstruct
     public void init(){
-        userService.register("demo", "demo");
     }
 }
