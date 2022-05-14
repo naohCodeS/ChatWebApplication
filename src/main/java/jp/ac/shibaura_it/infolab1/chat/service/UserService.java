@@ -27,6 +27,7 @@ public class UserService {
         user.setUsername(username);
         return userRepository.findOne(Example.of(user)).get();
     }
+
     public User update(User user){
         return userRepository.save(user);
     }

@@ -16,18 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("chat")
-public class ChatFormController {
+public class ChatController {
     @Autowired
     UserService userService;
 
-    @GetMapping
-    String chatForm(Model model){
-        return "chat/chatForm";
-    }
+    @GetMapping(path = "chatForm")
+    String chatForm(Model model){return "/chatForm";}
 
     @PostMapping(path = "chat")
     String chat(Model model, @AuthenticationPrincipal LoginUserDetails userDetails){
-        return "redirect:/chat";
+        return "redirect:/chatForm";
     }
 }

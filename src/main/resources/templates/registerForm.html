@@ -6,12 +6,12 @@
 </head>
 <body>
 <h1>ユーザ登録</h1>
-<form action="@{register/register}" th:object="${registerForm}" method="post">
+<form th:action="@{register}" th:object="${registerForm}" method="post">
     <input type="text" name="username" placeholder="username" th:field="*{username}">
     <input type="password" name="password" placeholder="password" th:field="*{password}">
     <input type="submit" value="登録する">
 </form>
-<a href="/login/login">ログインする</a>
+<a href="/login">ログインする</a>
 <p th:text="${errorMessage}"></p>
 </body>
 </html>

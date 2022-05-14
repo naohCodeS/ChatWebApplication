@@ -19,14 +19,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //デフォ�
     protected void configure(HttpSecurity http) throws Exception{ //認可、ログイン・ログアウト設定
         http
                 .authorizeRequests() //認可に関する設定
-                    .antMatchers("/loginForm").permitAll()
+                    .antMatchers("/loginForm", "/registerForm").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()//ログインに関する設定
                 .loginProcessingUrl("/login")
                     .loginPage("/loginForm")
                     .failureUrl("/loginForm?error")
-                    .defaultSuccessUrl("/home", true)
+                    .defaultSuccessUrl("/chatForm", true)
                     .usernameParameter("username").passwordParameter("password")
                 .and()//ログアウトに関する設定
                 .logout().logoutSuccessUrl("/loginForm");
