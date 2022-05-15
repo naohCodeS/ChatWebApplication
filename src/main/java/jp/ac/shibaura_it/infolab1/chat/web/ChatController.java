@@ -36,7 +36,8 @@ public class ChatController {
         userDetails.getUser().setChannels(channelService.findAll());
 
         model.addAttribute("channelNullError", channelNullError);
-        model.addAttribute("channelList", userDetails.getUser().getChannels());
+        model.addAttribute("channelList", channelService.findAll());
+        model.addAttribute("userList", userService.findAll());
         if(userDetails.getUser().getCurrentChannel() != null){
             model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
             model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());
@@ -65,10 +66,12 @@ public class ChatController {
     @RequestMapping(value = "/selectChannel")
     String selectChannel(@RequestParam("channelName")String channelName,
                          @AuthenticationPrincipal LoginUserDetails userDetails){
-        System.out.println(channelName);
+
         Integer id = Integer.valueOf(channelName.split(" / ")[channelName.split(" / ").length - 1]);
-        System.out.println("select channel : " + id);
-        userDetails.getUser().setCurrentChannel(channelService.findOne(Integer.valueOf(id)));
+
+        Channel selectedChannel = channelService.findOne(id);
+        userDetails.getUser().setCurrentChannel(selectedChannel);
+
         if(channelNullError != null) channelNullError = null;
         return "redirect:/chat";
     }

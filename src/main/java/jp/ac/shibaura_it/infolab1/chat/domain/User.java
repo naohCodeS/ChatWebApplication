@@ -36,8 +36,7 @@ public class User {
 
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(
-            cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             mappedBy = "user")
     private List<Chat> chats;

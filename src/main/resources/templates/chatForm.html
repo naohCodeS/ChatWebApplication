@@ -42,6 +42,15 @@
     <input name="chat" placeholder="発言する" type="text">
     <input type="submit" value="発言">
 </form>
+<div name="userListContainer">
+    <table>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.getUsername}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <!--<table>-->
 <!--    <tbody>-->
 <!--    <tr th:each="chat : ${chats}">-->
