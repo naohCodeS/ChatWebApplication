@@ -3,6 +3,7 @@ package jp.ac.shibaura_it.infolab1.chat.web;
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.LoginUserDetails;
@@ -27,11 +28,20 @@ public class ChatController {
     @Autowired
     ChatService chatService;
 
+    static String channelNullError;
+
     @GetMapping(path = "chat")
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
+
+        userDetails.getUser().setChannels(channelService.findAll());
+
+        model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", userDetails.getUser().getChannels());
-        model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
-        model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());
+        if(userDetails.getUser().getCurrentChannel() != null){
+            model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
+            model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());
+            userDetails.getUser().setCurrentChannel(channelService.findOne(userDetails.getUser().getCurrentChannel().getId()));
+        }
         return "/chatForm";
     }
 
@@ -59,6 +69,7 @@ public class ChatController {
         Integer id = Integer.valueOf(channelName.split(" / ")[channelName.split(" / ").length - 1]);
         System.out.println("select channel : " + id);
         userDetails.getUser().setCurrentChannel(channelService.findOne(Integer.valueOf(id)));
+        if(channelNullError != null) channelNullError = null;
         return "redirect:/chat";
     }
 
@@ -71,9 +82,11 @@ public class ChatController {
         Chat chat = new Chat();
         chat.setChatText(chatText);
 
-        chatService.create(chat, channel, user);
-
-//        user.getCurrentChannel().getChats().add(chat);
+        try {
+            chatService.create(chat, channel, user);
+        } catch (ChannelNullException e) {
+            channelNullError = e.getMessage();
+        }
 
         System.out.println("chat");
         System.out.println(userDetails.getUser() +"\n"+chatText);

@@ -4,6 +4,7 @@ import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.exception.user.InvalidPasswordException;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.UserService;
@@ -72,7 +73,7 @@ public class domainTest {
     }
 
     @Test
-    void chatCreateTest(){
+    void chatCreateTest() throws ChannelNullException {
         User user = new User("username", "password", null, null, null);
         Channel channel = new Channel("channel");
         Chat chat = new Chat(null, null, "Hello, world!", null, null);

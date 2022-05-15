@@ -28,6 +28,7 @@
     </form>
 </div>
 <div name="chat">
+    <p th:if="${channelNullError != null}">チャネルを選択してください</p>
     <label th:text="${'#'+currentChannelName}"></label>
     <table>
         <tbody>

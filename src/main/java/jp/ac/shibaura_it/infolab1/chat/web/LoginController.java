@@ -32,8 +32,4 @@ public class LoginController {
     String postLogin(){
         return "redirect:/chatForm";
     }
-
-    @PostConstruct
-    public void init(){
-    }
 }
