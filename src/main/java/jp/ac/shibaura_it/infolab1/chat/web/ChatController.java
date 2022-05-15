@@ -31,7 +31,7 @@ public class ChatController {
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
         model.addAttribute("channelList", userDetails.getUser().getChannels());
         model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
-//        model.addAttribute("channelId", userDetails.getUser().getCurrentChannel());
+        model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());
         return "/chatForm";
     }
 
@@ -62,14 +62,21 @@ public class ChatController {
         return "redirect:/chat";
     }
 
-    @PostMapping(value = "/add")
+    @RequestMapping(value = "/add")
     String addChat(@AuthenticationPrincipal LoginUserDetails userDetails,
                    @RequestParam(value = "chat")String chatText){
-        User user = userDetails.getUser();
-//        Channel channel = user.getCurrentChannel();
-        Chat chat = new Chat(null, null, chatText, null, null);
 
-//        chatService.create(chat, channel, user);
+        User user = userDetails.getUser();
+        Channel channel = user.getCurrentChannel();
+        Chat chat = new Chat();
+        chat.setChatText(chatText);
+
+        chatService.create(chat, channel, user);
+
+//        user.getCurrentChannel().getChats().add(chat);
+
+        System.out.println("chat");
+        System.out.println(userDetails.getUser() +"\n"+chatText);
 
         return "redirect:/chat";
     }

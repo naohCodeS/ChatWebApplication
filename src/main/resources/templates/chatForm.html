@@ -32,7 +32,7 @@
     <table>
         <tbody>
         <tr th:each="chat : ${chatList}">
-            <td th:text="${chat.getUser().getUserName() +  ' : ' + chat.getChat() +'  '+chat.getChattedTime()}"></td>
+            <td th:text="${chat.getUser().getUsername() +  ' : ' + chat.getChatText()}"></td>
         </tr>
         </tbody>
     </table>
