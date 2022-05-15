@@ -39,9 +39,10 @@ public class ChatController {
         return "redirect:/chatForm";
     }
 
-    @PostMapping(value = "createChannel")
+    @RequestMapping(value = "createChannel")
     String createChannel(@RequestParam("channelName")String channelName,
                          @AuthenticationPrincipal LoginUserDetails userDetails){
+        System.out.println("create channel");
         Channel channel = new Channel(null, channelName, null, null);
         channelService.create(channel, userDetails.getUser());
         return "redirect:/chat";
@@ -56,10 +57,10 @@ public class ChatController {
     String addChat(@AuthenticationPrincipal LoginUserDetails userDetails,
                    @RequestParam("chat")String chatText){
         User user = userDetails.getUser();
-        Channel channel = user.getCurrentChannel();
+//        Channel channel = user.getCurrentChannel();
         Chat chat = new Chat(null, null, chatText, null, null);
 
-        chatService.create(chat, channel, user);
+//        chatService.create(chat, channel, user);
 
         return "redirect:/chat";
     }

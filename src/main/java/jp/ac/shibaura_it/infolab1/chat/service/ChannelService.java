@@ -19,9 +19,7 @@ public class ChannelService {
         if(channel.getUsers() == null) {
             channel.setUsers(new ArrayList<>());
         }
-        if(user.getCurrentChannel() == null){
-            user.setCurrentChannel(channel);
-        }
+
         channel.getUsers().add(user);
 
         //ユーザへのチャネル追加
