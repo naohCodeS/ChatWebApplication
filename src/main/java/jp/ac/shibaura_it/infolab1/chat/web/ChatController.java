@@ -30,6 +30,8 @@ public class ChatController {
     @GetMapping(path = "chat")
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
         model.addAttribute("channelList", userDetails.getUser().getChannels());
+        model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
+//        model.addAttribute("channelId", userDetails.getUser().getCurrentChannel());
         return "/chatForm";
     }
 
@@ -43,19 +45,26 @@ public class ChatController {
     String createChannel(@RequestParam("channelName")String channelName,
                          @AuthenticationPrincipal LoginUserDetails userDetails){
         System.out.println("create channel");
-        Channel channel = new Channel(null, channelName, null, null);
+        Channel channel = new Channel();
+        channel.setChannelName(channelName);
         channelService.create(channel, userDetails.getUser());
+        System.out.println(channel.getId());
         return "redirect:/chat";
     }
 
-    @PostMapping(value = "/selectChannel")
-    String selectChannel(){
+    @RequestMapping(value = "/selectChannel")
+    String selectChannel(@RequestParam("channelName")String channelName,
+                         @AuthenticationPrincipal LoginUserDetails userDetails){
+        System.out.println(channelName);
+        Integer id = Integer.valueOf(channelName.split(" / ")[channelName.split(" / ").length - 1]);
+        System.out.println("select channel : " + id);
+        userDetails.getUser().setCurrentChannel(channelService.findOne(Integer.valueOf(id)));
         return "redirect:/chat";
     }
 
     @PostMapping(value = "/add")
     String addChat(@AuthenticationPrincipal LoginUserDetails userDetails,
-                   @RequestParam("chat")String chatText){
+                   @RequestParam(value = "chat")String chatText){
         User user = userDetails.getUser();
 //        Channel channel = user.getCurrentChannel();
         Chat chat = new Chat(null, null, chatText, null, null);

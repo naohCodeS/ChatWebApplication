@@ -13,7 +13,9 @@
             <tbody>
             <tr th:each="channel : ${channelList}">
                 <td>
-                    <button type="submit" th:text="${'#'+channel.getChannelName}" name="channelName"></button>
+                    <input type="submit" th:value="${'#'+channel.getChannelName + ' / '+channel.getId}" name="channelName">
+<!--                    <input type="submit" th:value="${'#'+channel.getId}", name="channelName">-->
+<!--                    <span th:text="${channel.getId}" name="channelName"></span>-->
                 </td>
             </tr>
             </tbody>

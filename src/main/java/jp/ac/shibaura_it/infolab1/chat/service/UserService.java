@@ -41,17 +41,8 @@ public class UserService {
     public User register(String username, String password) throws UserNameDuplicateException {
         if(!userRepository.findById(username).isEmpty()) throw new UserNameDuplicateException("the username is already used");
         password = new Pbkdf2PasswordEncoder().encode(password);
-        User user = new User(username, password, null, null);
+        User user = new User(username, password, null, null, null);
 
         return userRepository.save(user);
     }
-
-
-//    public void registerUser(String userName, String password) throws InvalidPasswordException, UserNameDuplicateException {
-//        userRepository.;
-//    }
-
-//    public User login(String userName, String password) throws PasswordUnmatchException, UserNameUnregisteredException, InvalidPasswordException {
-//        return userList.login(userName, password);
-//    }
 }

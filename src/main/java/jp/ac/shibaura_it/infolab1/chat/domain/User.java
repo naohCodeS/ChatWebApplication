@@ -42,6 +42,10 @@ public class User {
             mappedBy = "user")
     private List<Chat> chats;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = true, name = "id")
+    private Channel currentChannel;
+
     public User(String userName, String password) throws InvalidPasswordException {
         this.setAccountInfo(userName, password);
 //        this.currentChannel = new Channel("Private Channel");

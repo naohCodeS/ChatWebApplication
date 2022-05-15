@@ -31,11 +31,13 @@ public class ChannelService {
     public List<Channel> findAll(){
         return channelRepository.findAll();
     }
+    public Channel findOne(Integer id){
+        return channelRepository.findById(id).get();
+    }
 
     public Channel update(Channel channel, User user){
         if(user.getChannels() == null) user.setChannels(new ArrayList<>());
         user.getChannels().add(channel);
         return channelRepository.save(channel);
     }
-
 }

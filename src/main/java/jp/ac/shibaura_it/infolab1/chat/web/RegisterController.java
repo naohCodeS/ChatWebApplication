@@ -50,8 +50,10 @@ public class RegisterController {
 
             Channel channel = new Channel(null, "Private Channel", null, null);
             Chat chat = new Chat(null, null, "ここはプライベートチャンネルです", null, null);
+            user.setCurrentChannel(channel);
             channelService.create(channel, user);
             chatService.create(chat, channel, user);
+            System.out.println("currentchannel "+user.getCurrentChannel());
 
             return "redirect:/login";
         } catch (UserNameDuplicateException e) {

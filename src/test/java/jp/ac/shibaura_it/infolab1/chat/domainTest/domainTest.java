@@ -60,7 +60,7 @@ public class domainTest {
 
     @Test
     void channelCreateTest(){
-        User user = new User("username", "password", null, null);
+        User user = new User("username", "password", null, null, null);
         userService.create(user);
         Channel channel = new Channel(null, "channelName", null, null);
         channelService.create(channel, user);
@@ -73,7 +73,7 @@ public class domainTest {
 
     @Test
     void chatCreateTest(){
-        User user = new User("username", "password", null, null);
+        User user = new User("username", "password", null, null, null);
         Channel channel = new Channel("channel");
         Chat chat = new Chat(null, null, "Hello, world!", null, null);
 
@@ -86,5 +86,16 @@ public class domainTest {
 //        System.out.println(userService.findAll());
 //        System.out.println(channelService.findAll());
 //        System.out.println(chatService.findAll());
+    }
+
+    @Test
+    void currentChannelTest(){
+        User user = new User("username", "password", null, null, null);
+        Channel channel = new Channel("currentChannel");
+        userService.create(user);
+        channelService.create(channel, user);
+        user.setCurrentChannel(channel);
+
+        assertThat(user.getCurrentChannel()).isEqualTo(channel);
     }
 }
