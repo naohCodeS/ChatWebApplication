@@ -17,6 +17,7 @@
     <form th:action="@{/registerForm}" method="post" class="form-signin" th:object="${registerForm}">
         <h1 class="h3 mb-3 font-weight-normal">新規ユーザー登録</h1>
         <p class="alert alert-danger" th:if="${errorMessage != null}">そのユーザ名は既に使われています</p>
+        <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}">パスワードには特殊文字を含めないでください</p>
         <input type="text" class="form-control" name="username" placeholder = "username" required="required" autofocus="autofocus" th:field="*{username}">
         <input type="password" class="form-control" name="password" placeholder="password" required="required" th:field="*{password}">
         <!--        <input type="submit" value="login">-->
