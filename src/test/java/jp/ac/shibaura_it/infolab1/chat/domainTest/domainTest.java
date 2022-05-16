@@ -59,6 +59,7 @@ public class domainTest {
         assertThat(userService.findOne("username").getPassword()).isEqualTo("pass");
     }
 
+    //Autowiredのためエラーが出る可能性あり
     @Test
     void channelCreateTest(){
         User user = new User("username", "password", null, null, null);

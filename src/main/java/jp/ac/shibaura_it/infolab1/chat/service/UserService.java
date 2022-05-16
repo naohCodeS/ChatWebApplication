@@ -45,4 +45,15 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public User addChannel(User user, Channel channel){
+        if(user.getChannels().contains(channel));
+        else user.getChannels().add(channel);
+        return this.update(user);
+    }
+
+    public User changeCurrentChannel(User user, Channel channel){
+        user.setCurrentChannel(channel);
+        return this.update(user);
+    }
 }

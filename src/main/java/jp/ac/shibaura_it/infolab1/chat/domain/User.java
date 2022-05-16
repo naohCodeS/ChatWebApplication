@@ -34,6 +34,7 @@ public class User {
                 mappedBy = "users") //関連先でのプロパティ名
     private List<Channel> channels;
 
+    //これいらないかも
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL,

@@ -33,12 +33,18 @@ public class ChatController {
     @GetMapping(path = "chat")
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
 
-        userDetails.getUser().setChannels(channelService.findAll());
+
+//        User user = userDetails.getUser(); user.setChannels(channelService.findAll());
+//        userService.update(user);
+//        userDetails.getUser().setChannels(channelService.findAll());
 
         model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", channelService.findAll());
-        model.addAttribute("userList", userService.findAll());
+
+
         if(userDetails.getUser().getCurrentChannel() != null){
+            Channel currentChannel = userDetails.getUser().getCurrentChannel();
+            model.addAttribute("userList", currentChannel.getUsers());
             model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
             model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());
             userDetails.getUser().setCurrentChannel(channelService.findOne(userDetails.getUser().getCurrentChannel().getId()));
@@ -48,7 +54,7 @@ public class ChatController {
 
     @PostMapping(path = "channel")
     String channel(Model model, @AuthenticationPrincipal LoginUserDetails userDetails){
-        User user = userDetails.getUser();
+//        User user = userDetails.getUser();
         return "redirect:/chatForm";
     }
 
@@ -70,7 +76,17 @@ public class ChatController {
         Integer id = Integer.valueOf(channelName.split(" / ")[channelName.split(" / ").length - 1]);
 
         Channel selectedChannel = channelService.findOne(id);
-        userDetails.getUser().setCurrentChannel(selectedChannel);
+        User user = userDetails.getUser(); user.setCurrentChannel(selectedChannel);
+
+        if(selectedChannel == user.getCurrentChannel()) return "redirect:/chat";
+
+        channelService.deleteUser(user.getCurrentChannel(), user);
+
+        userService.addChannel(user, selectedChannel);
+        userService.changeCurrentChannel(user, selectedChannel);
+        userService.update(user);
+
+        channelService.addUser(selectedChannel, user);
 
         if(channelNullError != null) channelNullError = null;
         return "redirect:/chat";
@@ -87,6 +103,7 @@ public class ChatController {
 
         try {
             chatService.create(chat, channel, user);
+            channelService.addChat(channel, chat);
         } catch (ChannelNullException e) {
             channelNullError = e.getMessage();
         }

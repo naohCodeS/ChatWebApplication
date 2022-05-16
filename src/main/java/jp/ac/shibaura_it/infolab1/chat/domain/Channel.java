@@ -26,7 +26,6 @@ public class Channel {
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             mappedBy = "channel")
     private List<Chat> chats;
