@@ -24,14 +24,14 @@ public class ChatService {
         chat.setUser(user);
         //チャネルへチャットを追加
         if(channel.getChats() == null) channel.setChats(new ArrayList<>());
-        channel.getChats().add(chat);
+//        channel.getChats().add(chat);
 
         if(user.getChats() == null) user.setChats(new ArrayList<>());
         user.getChats().add(chat);
 
-        System.out.println(chat);
-        System.out.println(chat.getChannel());
-        System.out.println(chat.getUser());
+//        System.out.println(chat);
+//        System.out.println(chat.getChannel());
+//        System.out.println(chat.getUser());
 
         return chatRepository.save(chat);
     }

@@ -1,6 +1,7 @@
 package jp.ac.shibaura_it.infolab1.chat.service;
 
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
+import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.repository.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,22 @@ public class ChannelService {
     public Channel findOne(Integer id){
         return channelRepository.findById(id).get();
     }
-
-    public Channel update(Channel channel, User user){
-        if(user.getChannels() == null) user.setChannels(new ArrayList<>());
-        user.getChannels().add(channel);
+    public Channel addUser(Channel channel, User user){
+        if(channel.getUsers().contains(user)) ;
+        else channel.getUsers().add(user);
+        return this.update(channel);
+    }
+    public Channel addChat(Channel channel, Chat chat) {
+        channel.getChats().add(chat);
+        return this.update(channel);
+    }
+    public Channel deleteUser(Channel channel, User user){
+        channel.getUsers().remove(user);
+        return this.update(channel);
+    }
+    public Channel update(Channel channel){
         return channelRepository.save(channel);
     }
+
+
 }
