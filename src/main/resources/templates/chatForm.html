@@ -16,7 +16,6 @@
                     <div class = "channelListBox overflow-auto">
                         <div class="channelList" th:each="channel : ${channelList}">
                             <input type="submit" class="channelItem btn btn-outline-secondary" th:value="${'#'+channel.getChannelName + ' / '+channel.getId}" name="channelName">
-                            <!--                        <button type="submit" class="channelItem btn btn-outline-secondary" th:text="${'#'+channel.getChannelName + ' / '+channel.getId}" name="channelName"></button>-->
                         </div>
                     </div>
                 </form>
@@ -33,7 +32,8 @@
             <div class="col-6 midBox">
                 <div class="chatListBox">
                     <div class="chatList" th:each="chat : ${chatList}">
-                        <div class="p-3 border bg-light" th:text="${chat.getUser().getUsername()+' : '+chat.getChatText()}"></div>
+                        <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
+                        <div class="chatText" th:text="${chat.getChatText()}"></div>
                     </div>
                 </div>
                 <form action="/add">

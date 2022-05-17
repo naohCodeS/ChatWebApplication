@@ -39,6 +39,16 @@
 .chatListBox{
     height: 700px;
 }
+.chatList{
+    margin-bottom: 2px;
+    color: white;
+}
+.chatUserInfo{
+    font-size: 0.7em;
+}
+.chatText{
+    font-size: 1.2em;
+}
 .chatInput{
     width: 100%;
 }
