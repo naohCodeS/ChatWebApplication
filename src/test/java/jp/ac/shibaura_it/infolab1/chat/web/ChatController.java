@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/*
+Channel currentChannelではなく
+Integer currentChannelIdでいけるのでは？
+ */
+
 @Controller
 public class ChatController {
     @Autowired
@@ -102,7 +107,6 @@ public class ChatController {
         try {
             chatService.create(chat, channel, user);
             channelService.addChat(channel, chat);
-            channelService.update(channel);
         } catch (ChannelNullException e) {
             channelNullError = e.getMessage();
         }
