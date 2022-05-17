@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/*
+Channel currentChannelではなく
+Integer currentChannelIdでいけるのでは？
+ */
+
 @Controller
 public class ChatController {
     @Autowired
@@ -39,11 +44,14 @@ public class ChatController {
         model.addAttribute("username", userDetails.getUsername());
 
         if(userDetails.getUser().getCurrentChannel() != null){
+            System.out.println(userDetails.getUser().getCurrentChannel().getChats());
             Channel currentChannel = userDetails.getUser().getCurrentChannel();
-            model.addAttribute("userList", currentChannel.getUsers());
+//            model.addAttribute("userList", currentChannel.getUsers());
+            model.addAttribute("userList", channelService.findOne(currentChannel.getId()).getUsers());
             model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
-            model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());
-            userDetails.getUser().setCurrentChannel(channelService.findOne(userDetails.getUser().getCurrentChannel().getId()));
+//            model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());なんで動かないのか考える
+            model.addAttribute("chatList", channelService.findOne(userDetails.getUser().getCurrentChannel().getId()).getChats());
+//            userDetails.getUser().setCurrentChannel(channelService.findOne(userDetails.getUser().getCurrentChannel().getId()));
         }
         return "/chatForm";
     }
@@ -73,8 +81,7 @@ public class ChatController {
         Channel selectedChannel = channelService.findOne(id);
         User user = userDetails.getUser();
 
-//        if(user.getCurrentChannel() != null) channelService.deleteUser(user.getCurrentChannel(), user);
-        if(selectedChannel == user.getCurrentChannel()) return "redirect:/chat";
+        if(user.getCurrentChannel()!=null && selectedChannel.equals(user.getCurrentChannel())) return "redirect:/chat";
 
         userService.addChannel(user, selectedChannel);
         userService.changeCurrentChannel(user, selectedChannel);

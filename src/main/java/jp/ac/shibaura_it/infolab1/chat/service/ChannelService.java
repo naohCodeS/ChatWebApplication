@@ -29,6 +29,7 @@ public class ChannelService {
         return channelRepository.findById(id).get();
     }
     public Channel addUser(Channel channel, User user){
+        System.out.println(":: ChannelService addUser::");
         if(channel.getUsers().contains(user)) ;
         else channel.getUsers().add(user);
         return this.update(channel);

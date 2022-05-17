@@ -44,8 +44,12 @@ public class UserService {
     }
 
     public User addChannel(User user, Channel channel){
+        System.out.println(":: UserService ::");
+        System.out.println(channel.getChats());
         if(user.getChannels().contains(channel));
         else user.getChannels().add(channel);
+        System.out.println(channel.getChats());
+        System.out.println("user : "+user.getCurrentChannel());
         return this.update(user);
     }
 

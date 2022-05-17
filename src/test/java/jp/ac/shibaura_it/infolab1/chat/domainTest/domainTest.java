@@ -84,10 +84,6 @@ public class domainTest {
         chatService.create(chat, channel, user);
 
         assertThat(chatService.findAll().get(0)).isEqualTo(chat);
-
-//        System.out.println(userService.findAll());
-//        System.out.println(channelService.findAll());
-//        System.out.println(chatService.findAll());
     }
 
     @Test
