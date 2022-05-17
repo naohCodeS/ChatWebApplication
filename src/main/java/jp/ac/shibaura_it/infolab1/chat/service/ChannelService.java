@@ -16,17 +16,10 @@ public class ChannelService {
     ChannelRepository channelRepository;
 
     public Channel create(Channel channel, User user){
-        //チャネルへのユーザ追加
-        if(channel.getUsers() == null) {
-            channel.setUsers(new ArrayList<>());
-        }
-
+        if(channel.getUsers() == null) channel.setUsers(new ArrayList<>());
         channel.getUsers().add(user);
-
-        //ユーザへのチャネル追加
         if(user.getChannels() == null) user.setChannels(new ArrayList<>());
         user.getChannels().add(channel);
-
         return channelRepository.save(channel);
     }
     public List<Channel> findAll(){
@@ -51,6 +44,4 @@ public class ChannelService {
     public Channel update(Channel channel){
         return channelRepository.save(channel);
     }
-
-
 }

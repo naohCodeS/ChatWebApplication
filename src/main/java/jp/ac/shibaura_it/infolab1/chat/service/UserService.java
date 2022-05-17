@@ -23,9 +23,7 @@ public class UserService {
 
     private Channel currentChannel;
 
-    public User create(User user){
-        return userRepository.save(user);
-    }
+    public User create(User user){return userRepository.save(user);}
     public List<User> findAll(){ //read
         return userRepository.findAll();
     }
@@ -42,7 +40,6 @@ public class UserService {
         if(!userRepository.findById(username).isEmpty()) throw new UserNameDuplicateException("the username is already used");
         password = new Pbkdf2PasswordEncoder().encode(password);
         User user = new User(username, password, null, null, null);
-
         return userRepository.save(user);
     }
 

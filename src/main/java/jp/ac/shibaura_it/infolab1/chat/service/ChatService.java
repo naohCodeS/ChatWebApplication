@@ -22,17 +22,9 @@ public class ChatService {
         if(channel == null) throw new ChannelNullException("Channel is not selected");
         chat.setChannel(channel); //チャットをチャネルへ登録
         chat.setUser(user);
-        //チャネルへチャットを追加
         if(channel.getChats() == null) channel.setChats(new ArrayList<>());
-//        channel.getChats().add(chat);
-
         if(user.getChats() == null) user.setChats(new ArrayList<>());
         user.getChats().add(chat);
-
-//        System.out.println(chat);
-//        System.out.println(chat.getChannel());
-//        System.out.println(chat.getUser());
-
         return chatRepository.save(chat);
     }
     public List<Chat> findAll(){return chatRepository.findAll();}

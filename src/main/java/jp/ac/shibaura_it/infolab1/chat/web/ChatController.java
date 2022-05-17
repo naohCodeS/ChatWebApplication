@@ -32,15 +32,11 @@ public class ChatController {
 
     @GetMapping(path = "chat")
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
-
-
-//        User user = userDetails.getUser(); user.setChannels(channelService.findAll());
-//        userService.update(user);
-//        userDetails.getUser().setChannels(channelService.findAll());
+        System.out.println(":: get map ::");
 
         model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", channelService.findAll());
-
+        model.addAttribute("username", userDetails.getUsername());
 
         if(userDetails.getUser().getCurrentChannel() != null){
             Channel currentChannel = userDetails.getUser().getCurrentChannel();
@@ -54,33 +50,31 @@ public class ChatController {
 
     @PostMapping(path = "channel")
     String channel(Model model, @AuthenticationPrincipal LoginUserDetails userDetails){
-//        User user = userDetails.getUser();
+        System.out.println(":: post channel ::");
         return "redirect:/chatForm";
     }
 
     @RequestMapping(value = "createChannel")
     String createChannel(@RequestParam("channelName")String channelName,
                          @AuthenticationPrincipal LoginUserDetails userDetails){
-        System.out.println("create channel");
-        Channel channel = new Channel();
-        channel.setChannelName(channelName);
+        System.out.println(":: create channel ::");
+        Channel channel = new Channel(); channel.setChannelName(channelName);
         channelService.create(channel, userDetails.getUser());
-        System.out.println(channel.getId());
+        System.out.println("created channel : " + channel);
         return "redirect:/chat";
     }
 
     @RequestMapping(value = "/selectChannel")
     String selectChannel(@RequestParam("channelName")String channelName,
                          @AuthenticationPrincipal LoginUserDetails userDetails){
+        System.out.println(":: select channel ::");
 
         Integer id = Integer.valueOf(channelName.split(" / ")[channelName.split(" / ").length - 1]);
-
         Channel selectedChannel = channelService.findOne(id);
-        User user = userDetails.getUser(); user.setCurrentChannel(selectedChannel);
+        User user = userDetails.getUser();
 
+//        if(user.getCurrentChannel() != null) channelService.deleteUser(user.getCurrentChannel(), user);
         if(selectedChannel == user.getCurrentChannel()) return "redirect:/chat";
-
-        channelService.deleteUser(user.getCurrentChannel(), user);
 
         userService.addChannel(user, selectedChannel);
         userService.changeCurrentChannel(user, selectedChannel);
@@ -89,17 +83,19 @@ public class ChatController {
         channelService.addUser(selectedChannel, user);
 
         if(channelNullError != null) channelNullError = null;
+
+        System.out.println("selected channel : "+selectedChannel);
         return "redirect:/chat";
     }
 
     @RequestMapping(value = "/add")
     String addChat(@AuthenticationPrincipal LoginUserDetails userDetails,
                    @RequestParam(value = "chat")String chatText){
+        System.out.println(":: add chat ::");
 
         User user = userDetails.getUser();
         Channel channel = user.getCurrentChannel();
-        Chat chat = new Chat();
-        chat.setChatText(chatText);
+        Chat chat = new Chat(); chat.setChatText(chatText);
 
         try {
             chatService.create(chat, channel, user);
@@ -108,8 +104,7 @@ public class ChatController {
             channelNullError = e.getMessage();
         }
 
-        System.out.println("chat");
-        System.out.println(userDetails.getUser() +"\n"+chatText);
+        System.out.println(userDetails.getUser() + " created " + chat + " to " + channel);
 
         return "redirect:/chat";
     }
