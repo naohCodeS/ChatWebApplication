@@ -37,8 +37,9 @@
                 </div>
             </div>
             <div class="col-7 midBox">
+                <div class="currentChannelName p-1 border" th:text="${'# '+currentChannelName}"></div>
                 <div class="chatListBox overflow-auto">
-                    <div class="chatList" th:each="chat : ${chatList}">
+                    <div class="chatList p-2" th:each="chat : ${chatList}">
                         <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
                         <div class="chatText" th:text="${chat.getChatText()}"></div>
                     </div>

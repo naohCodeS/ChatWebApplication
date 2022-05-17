@@ -42,7 +42,6 @@ public class ChatController {
     @GetMapping(path = "chat")
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
         System.out.println(":: get map ::");
-
         model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", channelService.findAll());
         model.addAttribute("username", userDetails.getUsername());
