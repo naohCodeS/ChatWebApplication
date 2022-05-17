@@ -7,7 +7,9 @@ import jp.ac.shibaura_it.infolab1.chat.exception.user.UserNameDuplicateException
 import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class chatApplicationController {
+//なし
+
+public class ChatApplicationService {
     @Autowired
     UserService userService;
     @Autowired
@@ -37,7 +39,7 @@ public class chatApplicationController {
         channelService.addUser(channel, user);
         userService.changeCurrentChannel(user, channel);
     }
-    public void createChannel(){
-
+    public void createChannel(Channel channel, User user){
+        channelService.create(channel, user);
     }
 }
