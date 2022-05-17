@@ -6,7 +6,7 @@
     background-color: rgb(80, 80, 80);
 }
 .channelListBox{
-    height: 700px;
+    height: 750px;
 }
 .channelList{
     margin-bottom: 3px;
@@ -31,15 +31,19 @@
     color: white;
 }
 .userInfo{
-    width: 100%;
-    background-color: rgb(60, 60, 60);
     color: white;
+    background-color: rgb(60, 60, 60);
+}
+.logoutBtn{
+    border: none;
+    background-color: rgb(60, 60, 60);
+    border-color: rgb(60, 60, 60);
 }
 .midBox{
     padding: 10px;
 }
 .chatListBox{
-    height: 700px;
+    height: 810px;
 }
 .chatList{
     color: white;
