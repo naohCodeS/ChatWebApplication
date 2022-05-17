@@ -1,2 +1,68 @@
-@charset "UTF-8"
-
+.container{
+    background-color: rgb(100, 100, 100);
+}
+.leftBox{
+    padding: 10px;
+    background-color: rgb(80, 80, 80);
+}
+.channelListBox{
+    height: 700px;
+}
+.channelItem{
+    margin-bottom: 3px;
+    color: white;
+    width: 100%;
+}
+.channelInput{
+    width: 100%;
+}
+.channelInputArea{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.channelInputArea:focus{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.channelSetBtn{
+    background-color: rgb(60, 60, 60);
+    color: white;
+}
+.userInfo{
+    width: 100%;
+    background-color: rgb(60, 60, 60);
+    color: white;
+}
+.midBox{
+    padding: 10px;
+}
+.chatListBox{
+    height: 700px;
+}
+.chatInput{
+    width: 100%;
+}
+.chatInputArea{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.chatInputArea:focus{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.sendBtn{
+    background-color: rgb(60, 60, 60);
+    color: white;
+}
+.lightBox{
+    padding: 10px;
+    background-color: rgb(80, 80, 80);
+}
+.userListBox{
+    height: 700px;
+}
+.userItem{
+    margin: 3px;
+    color: white;
+    width: 100%;
+}
