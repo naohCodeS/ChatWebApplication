@@ -3,7 +3,9 @@ package jp.ac.shibaura_it.infolab1.chat.web;
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNameNullException;
 import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChatTextNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.LoginUserDetails;
@@ -34,6 +36,8 @@ public class ChatController {
     ChatService chatService;
 
     static String channelNullError;
+    static String chatTextNullError;
+    static String channelNameNullError;
 
     @GetMapping(path = "chat")
     String chatForm(@AuthenticationPrincipal LoginUserDetails userDetails, Model model){
@@ -42,6 +46,7 @@ public class ChatController {
         model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", channelService.findAll());
         model.addAttribute("username", userDetails.getUsername());
+//        model.addAttribute("chatTextNullError", chatTextNullError);
 
         if(userDetails.getUser().getCurrentChannel() != null){
             System.out.println(userDetails.getUser().getCurrentChannel().getChats());
@@ -67,7 +72,11 @@ public class ChatController {
                          @AuthenticationPrincipal LoginUserDetails userDetails){
         System.out.println(":: create channel ::");
         Channel channel = new Channel(); channel.setChannelName(channelName);
-        channelService.create(channel, userDetails.getUser());
+        try {
+            channelService.create(channel, userDetails.getUser());
+        } catch (ChannelNameNullException e) {
+            channelNameNullError = e.getMessage();
+        }
         System.out.println("created channel : " + channel);
         return "redirect:/chat";
     }
@@ -100,6 +109,8 @@ public class ChatController {
                    @RequestParam(value = "chat")String chatText){
         System.out.println(":: add chat ::");
 
+        if(chatTextNullError != null) chatTextNullError = null;
+
         User user = userDetails.getUser();
         Channel channel = user.getCurrentChannel();
         Chat chat = new Chat(); chat.setChatText(chatText);
@@ -109,6 +120,8 @@ public class ChatController {
             channelService.addChat(channel, chat);
         } catch (ChannelNullException e) {
             channelNullError = e.getMessage();
+        } catch (ChatTextNullException e) {
+            chatTextNullError = e.getMessage();
         }
 
         System.out.println(userDetails.getUser() + " created " + chat + " to " + channel);

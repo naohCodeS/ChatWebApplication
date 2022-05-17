@@ -4,7 +4,9 @@ import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.exception.user.InvalidPasswordException;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNameNullException;
 import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChatTextNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.UserService;
@@ -22,7 +24,7 @@ public class japTest {
     ChatService chatService;
 
     @Test
-    void test() throws InvalidPasswordException, ChannelNullException {
+    void test() throws InvalidPasswordException, ChannelNullException, ChatTextNullException, ChannelNameNullException {
 
         User user = new User(); user.setUsername(String.valueOf(1)); user.setPassword(String.valueOf(1));
 

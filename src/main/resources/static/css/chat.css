@@ -8,8 +8,10 @@
 .channelListBox{
     height: 700px;
 }
-.channelItem{
+.channelList{
     margin-bottom: 3px;
+}
+.channelItem{
     color: white;
     width: 100%;
 }
@@ -40,13 +42,13 @@
     height: 700px;
 }
 .chatList{
-    margin-bottom: 2px;
     color: white;
 }
 .chatUserInfo{
     font-size: 0.7em;
 }
 .chatText{
+    margin-bottom: 2px;
     font-size: 1.2em;
 }
 .chatInput{

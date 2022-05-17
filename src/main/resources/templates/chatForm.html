@@ -30,11 +30,13 @@
                 </div>
             </div>
             <div class="col-6 midBox">
-                <div class="chatListBox">
+                <div class="chatListBox overflow-auto">
                     <div class="chatList" th:each="chat : ${chatList}">
                         <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
                         <div class="chatText" th:text="${chat.getChatText()}"></div>
                     </div>
+<!--                    <div class="alert alert-danger" role="alert" th:if="${chatTextNullError != null}" th:text="${chatTextNullError}"></div>-->
+                    <div class="alert alert-danger" role="alert" th:if="${channelNullError != null}" th:text="${channelNullError}"></div>
                 </div>
                 <form action="/add">
                     <div class="chatInput input-group mb3">
