@@ -45,17 +45,13 @@ public class ChatController {
         model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", channelService.findAll());
         model.addAttribute("username", userDetails.getUsername());
-//        model.addAttribute("chatTextNullError", chatTextNullError);
 
         if(userDetails.getUser().getCurrentChannel() != null){
             System.out.println(userDetails.getUser().getCurrentChannel().getChats());
             Channel currentChannel = userDetails.getUser().getCurrentChannel();
-//            model.addAttribute("userList", currentChannel.getUsers());
             model.addAttribute("userList", channelService.findOne(currentChannel.getId()).getUsers());
             model.addAttribute("currentChannelName", userDetails.getUser().getCurrentChannel().getChannelName());
-//            model.addAttribute("chatList", userDetails.getUser().getCurrentChannel().getChats());なんで動かないのか考える
             model.addAttribute("chatList", channelService.findOne(userDetails.getUser().getCurrentChannel().getId()).getChats());
-//            userDetails.getUser().setCurrentChannel(channelService.findOne(userDetails.getUser().getCurrentChannel().getId()));
         }
         return "/chatForm";
     }

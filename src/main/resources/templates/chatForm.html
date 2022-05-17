@@ -10,7 +10,7 @@
 <header></header>
 <main>
     <div class="container">
-        <div class="row">
+        <div class="row mainScreen">
             <div class="col leftBox">
                 <form action="/selectChannel">
                     <div class = "channelListBox overflow-auto">
@@ -25,7 +25,7 @@
                         <input type="submit" class="channelSetBtn btn btn-outline-secondary" value="追加">
                     </div>
                 </form>
-                <div class="userInfo p-3 border">
+                <div class="userInfo p-3 border form-control">
                     <div class = "row username">
                         <div class="col-8" th:text="${username}"></div>
                         <form th:action="@{/logout}" class="col" role="form" method="post" id="logout">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-7 midBox">
-                <div class="currentChannelName p-1 border" th:text="${'#'+currentChannelName}"></div>
+                <div class="form-control currentChannelName p-1 border" th:text="${'#'+currentChannelName}"></div>
                 <div class="chatListBox overflow-auto">
                     <div class="chatList p-2" th:each="chat : ${chatList}">
                         <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
@@ -55,7 +55,7 @@
             </div>
             <div class="col rightBox">
                 <div class="userListBox overflow-auto">
-                    <div class="userList p-2" th:each="user : ${userList}">
+                    <div class="userList" th:each="user : ${userList}">
                         <div class="userItem btn btn-outline-secondary" th:text="${user.getUsername}"></div>
                     </div>
                 </div>
