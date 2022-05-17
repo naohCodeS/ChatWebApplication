@@ -37,9 +37,6 @@ public class domainTest {
 
         assertThat(twoArgs.getUsername()).isEqualTo("userName");
         assertThat(twoArgs.getPassword()).isEqualTo("password");
-
-        System.out.println(noArgs);
-        System.out.println(twoArgs);
     }
 
     @Test

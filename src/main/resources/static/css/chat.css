@@ -80,6 +80,9 @@
 .userListBox{
     height: 700px;
 }
+.userList{
+    margin-bottom: 3px;
+}
 .userItem{
     color: white;
     width: 100%;
