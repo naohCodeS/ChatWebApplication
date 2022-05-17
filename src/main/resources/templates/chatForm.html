@@ -21,7 +21,7 @@
                 </form>
                 <form action="/createChannel">
                     <div class="channelInput input-group mb3">
-                        <input type="text" class="form-control channelInputArea" name="channelName">
+                        <input type="text" class="form-control channelInputArea" name="channelName" placeholder="チャンネルの追加">
                         <input type="submit" class="channelSetBtn btn btn-outline-secondary" value="追加">
                     </div>
                 </form>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-7 midBox">
-                <div class="currentChannelName p-1 border" th:text="${'# '+currentChannelName}"></div>
+                <div class="currentChannelName p-1 border" th:text="${'#'+currentChannelName}"></div>
                 <div class="chatListBox overflow-auto">
                     <div class="chatList p-2" th:each="chat : ${chatList}">
                         <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
@@ -48,14 +48,16 @@
                 </div>
                 <form action="/add">
                     <div class="chatInput input-group mb3">
-                        <input type="text" class="form-control chatInputArea" name="chat">
+                        <input type="text" class="form-control chatInputArea" name="chat" th:placeholder="${'#'+currentChannelName+' へメッセージを送信'}">
                         <input type="submit" class="sendBtn btn btn-outline-secondary" value="送信">
                     </div>
                 </form>
             </div>
-            <div class="col lightBox">
-                <div class="userListBox" th:each="user : ${userList}">
-                    <div class="userItem btn btn-outline-secondary" th:text="${user.getUsername}"></div>
+            <div class="col rightBox">
+                <div class="userListBox overflow-auto">
+                    <div class="userList p-2" th:each="user : ${userList}">
+                        <div class="userItem btn btn-outline-secondary" th:text="${user.getUsername}"></div>
+                    </div>
                 </div>
             </div>
         </div>

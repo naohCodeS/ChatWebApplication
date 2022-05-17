@@ -1,0 +1,45 @@
+html{
+    height: 100%;
+    padding-bottom: 80px;
+}
+
+body{
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.form-signin{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    padding: 10px;
+    font-size: 16px;
+    height: auto;
+}
+
+.form-control{
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin input[type="text"]{
+    margin-button: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"]{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn{
+    margin-bottom: 10px;
+}
+
