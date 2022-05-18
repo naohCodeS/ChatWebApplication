@@ -3,9 +3,9 @@ package jp.ac.shibaura_it.infolab1.chat.web;
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNameNullException;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChatTextNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.channel.ChannelNameNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.channel.ChannelNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.chat.ChatTextNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.LoginUserDetails;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 /*
 Channel currentChannelではなく

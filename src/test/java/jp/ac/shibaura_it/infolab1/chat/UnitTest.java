@@ -3,20 +3,17 @@ package jp.ac.shibaura_it.infolab1.chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
-import jp.ac.shibaura_it.infolab1.chat.exception.chat.ChatNullException;
 import jp.ac.shibaura_it.infolab1.chat.exception.user.InvalidPasswordException;
 import jp.ac.shibaura_it.infolab1.chat.exception.user.UserNameDuplicateException;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNameNullException;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChatTextNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.channel.ChannelNameNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.channel.ChannelNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.chat.ChatTextNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.UserService;
-import jp.ac.shibaura_it.infolab1.chat.web.RegisterForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -41,7 +38,7 @@ public class UnitTest {
     }
 
     @Test
-    void usernameDuplicatedExceptionTest() throws UserNameDuplicateException {
+    void usernameDuplicatedExceptionTest() {
         try {
             userService.register("username", "password");
         } catch (UserNameDuplicateException e) {
@@ -54,17 +51,15 @@ public class UnitTest {
     @Test
     void InvalidPasswordExceptionTest(){
         //spring bootを用いた状態でないと動かないため手動で行う
-//        RegisterForm registerForm = new RegisterForm();
-//        registerForm.setPassword("/");
     }
 
     @Test
-    void loginTest() throws UserNameDuplicateException {
+    void loginTest(){
         //SpringSecurityを用いているため手動で行う
     }
 
     @Test
-    void chatTest() throws InvalidPasswordException, UserNameDuplicateException, ChannelNameNullException, ChatTextNullException, ChannelNullException {
+    void chatTest() throws UserNameDuplicateException, ChannelNameNullException, ChatTextNullException, ChannelNullException {
         User user = userService.register("username", "password");
         Channel channel = new Channel();
         channel.setChannelName("channel");

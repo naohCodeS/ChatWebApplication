@@ -3,7 +3,6 @@ package jp.ac.shibaura_it.infolab1.chat.service;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

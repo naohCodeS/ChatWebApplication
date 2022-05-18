@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +20,7 @@ public class Channel {
     @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(nullable = true, name = "username")
+    @JoinColumn(name = "username")
     private List<User> users;
     @JsonIgnore
     @ToString.Exclude

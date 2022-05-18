@@ -3,8 +3,8 @@ package jp.ac.shibaura_it.infolab1.chat.service;
 import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
-import jp.ac.shibaura_it.infolab1.chat.exception.web.ChatTextNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.channel.ChannelNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.chat.ChatTextNullException;
 import jp.ac.shibaura_it.infolab1.chat.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class ChatService {
 
     public Chat create(Chat chat, Channel channel, User user) throws ChannelNullException, ChatTextNullException {
         if(channel == null) throw new ChannelNullException("チャンネルが選択されていません");
-        if(chat.getChatText() == "") throw new ChatTextNullException("テキストが入力されていません");
+        if(chat.getChatText().equals("")) throw new ChatTextNullException("テキストが入力されていません");
         chat.setChannel(channel); //チャットをチャネルへ登録
         chat.setUser(user);
         if(channel.getChats() == null) channel.setChats(new ArrayList<>());
