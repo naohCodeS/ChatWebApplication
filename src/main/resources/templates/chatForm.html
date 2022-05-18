@@ -39,8 +39,11 @@
             <div class="col-7 midBox">
                 <div class="form-control currentChannelName p-1 border" th:text="${'#'+currentChannelName}"></div>
                 <div class="chatListBox overflow-auto">
-                    <div class="chatList p-2" th:each="chat : ${chatList}">
-                        <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
+                    <div class="chatList p-2" th:object="${DateFormat}" th:each="chat : ${chatList}">
+                        <div class="user_time">
+                            <div class="chatUserInfo" th:text="${chat.getUser().getUsername()}"></div>
+                            <div class="chatTime" th:text="${chat.getTime().format(DateFormat)}"></div>
+                        </div>
                         <div class="chatText" th:text="${chat.getChatText()}"></div>
                     </div>
 <!--                    <div class="alert alert-danger" role="alert" th:if="${chatTextNullError != null}" th:text="${chatTextNullError}"></div>-->

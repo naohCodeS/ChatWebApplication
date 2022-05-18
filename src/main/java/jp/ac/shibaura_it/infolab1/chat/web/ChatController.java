@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.format.DateTimeFormatter;
+
 /*
 Channel currentChannelではなく
 Integer currentChannelIdでいけるのでは？
@@ -43,7 +45,7 @@ public class ChatController {
         model.addAttribute("channelNullError", channelNullError);
         model.addAttribute("channelList", channelService.findAll());
         model.addAttribute("username", userDetails.getUsername());
-
+        model.addAttribute("DateFormat", DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         if(userDetails.getUser().getCurrentChannel() != null){
             System.out.println(userDetails.getUser().getCurrentChannel().getChats());
             Channel currentChannel = userDetails.getUser().getCurrentChannel();
@@ -111,6 +113,9 @@ public class ChatController {
         try {
             chatService.create(chat, channel, user);
             channelService.addChat(channel, chat);
+
+            System.out.println(chat.getTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+
         } catch (ChannelNullException e) {
             channelNullError = e.getMessage();
         } catch (ChatTextNullException e) {

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "chat")
@@ -24,7 +24,7 @@ public class Chat {
     @JoinColumn(name = "username")
     private User user;
     private String chatText;
-    private Calendar calendar;
+    private LocalDateTime time;
     @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)

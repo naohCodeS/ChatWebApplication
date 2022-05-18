@@ -52,11 +52,18 @@
 .chatList{
     color: white;
 }
+.user_time{
+}
 .chatUserInfo{
-    font-size: 0.7em;
+    font-size: 1em;
+    display: inline-block;
+}
+.chatTime{
+    font-size: 0.5em;
+    display: inline-block;
 }
 .chatText{
-    font-size: 1em;
+    font-size: 1.2em;
 }
 .chatInput{
     width: 100%;
