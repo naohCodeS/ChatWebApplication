@@ -4,7 +4,9 @@ import jp.ac.shibaura_it.infolab1.chat.domain.Channel;
 import jp.ac.shibaura_it.infolab1.chat.domain.Chat;
 import jp.ac.shibaura_it.infolab1.chat.domain.User;
 import jp.ac.shibaura_it.infolab1.chat.exception.user.InvalidPasswordException;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNameNullException;
 import jp.ac.shibaura_it.infolab1.chat.exception.web.ChannelNullException;
+import jp.ac.shibaura_it.infolab1.chat.exception.web.ChatTextNullException;
 import jp.ac.shibaura_it.infolab1.chat.service.ChannelService;
 import jp.ac.shibaura_it.infolab1.chat.service.ChatService;
 import jp.ac.shibaura_it.infolab1.chat.service.UserService;
@@ -35,9 +37,6 @@ public class domainTest {
 
         assertThat(twoArgs.getUsername()).isEqualTo("userName");
         assertThat(twoArgs.getPassword()).isEqualTo("password");
-
-        System.out.println(noArgs);
-        System.out.println(twoArgs);
     }
 
     @Test
@@ -61,7 +60,7 @@ public class domainTest {
 
     //Autowiredのためエラーが出る可能性あり
     @Test
-    void channelCreateTest(){
+    void channelCreateTest() throws ChannelNameNullException {
         User user = new User("username", "password", null, null, null);
         userService.create(user);
         Channel channel = new Channel(null, "channelName", null, null);
@@ -74,7 +73,7 @@ public class domainTest {
     }
 
     @Test
-    void chatCreateTest() throws ChannelNullException {
+    void chatCreateTest() throws ChannelNullException, ChatTextNullException, ChannelNameNullException {
         User user = new User("username", "password", null, null, null);
         Channel channel = new Channel("channel");
         Chat chat = new Chat(null, null, "Hello, world!", null, null);
@@ -87,7 +86,7 @@ public class domainTest {
     }
 
     @Test
-    void currentChannelTest(){
+    void currentChannelTest() throws ChannelNameNullException {
         User user = new User("username", "password", null, null, null);
         Channel channel = new Channel("currentChannel");
         userService.create(user);

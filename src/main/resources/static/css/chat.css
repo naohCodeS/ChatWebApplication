@@ -1,2 +1,89 @@
-@charset "UTF-8"
-
+.container{
+    background-color: rgb(90, 90, 90);
+}
+.leftBox{
+    padding: 10px;
+    background-color: rgb(80, 80, 80);
+}
+.channelListBox{
+    height: 750px;
+}
+.channelList{
+    margin-bottom: 3px;
+}
+.channelItem{
+    color: white;
+    width: 100%;
+}
+.channelInput{
+    width: 100%;
+}
+.channelInputArea{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.channelInputArea:focus{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.channelSetBtn{
+    background-color: rgb(60, 60, 60);
+    color: white;
+}
+.userInfo{
+    color: white;
+    background-color: rgb(60, 60, 60);
+}
+.logoutBtn{
+    border: none;
+    background-color: rgb(60, 60, 60);
+    border-color: rgb(60, 60, 60);
+}
+.midBox{
+    padding: 10px;
+}
+.currentChannelName{
+    color: white;
+    background-color: rgb(100, 100, 100);
+}
+.chatListBox{
+    height: 770px;
+}
+.chatList{
+    color: white;
+}
+.chatUserInfo{
+    font-size: 0.7em;
+}
+.chatText{
+    font-size: 1em;
+}
+.chatInput{
+    width: 100%;
+}
+.chatInputArea{
+    color: white;
+    background-color: rgb(100, 100, 100);
+}
+.chatInputArea:focus{
+    color: white;
+    background-color: rgb(100, 100, 100);
+}
+.sendBtn{
+    background-color: rgb(100, 100, 100);
+    color: white;
+}
+.rightBox{
+    padding: 10px;
+    background-color: rgb(80, 80, 80);
+}
+.userListBox{
+    height: 700px;
+}
+.userList{
+    margin-bottom: 3px;
+}
+.userItem{
+    color: white;
+    width: 100%;
+}
