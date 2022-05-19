@@ -37,3 +37,7 @@ ViewにBootstrapを使いました。
   
 チャット画面  
 ![10](https://user-images.githubusercontent.com/75174022/169304005-5884b4fa-39e5-4185-ac9d-078d16296002.png)
+  
+## 参考資料
+『はじめてのSpring Boot』槙俊明  
+Bootstrapオフィシャルサイト https://getbootstrap.jp/  
