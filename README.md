@@ -22,7 +22,7 @@ Spring Boot、Thymeleaf、単体・結合テスト（JUnit）、UML の練習と
 EntityとかRepositoryとかのDBよりのクラスまでクラス図に書く必要あるのかどうなんでしょう。  
 せめてEntityはER図とかにすべきだったような気もします。  
   
-システム全体の方針は基本的なSpring MVCモデルに従ったつもりです。
+システム全体の方針は基本的なSpring MVCモデルに従ったつもりです。  
 Spring MVCモデル  
 ![MVC](https://user-images.githubusercontent.com/75174022/169303064-4ea3bf7e-d075-4456-b920-b170b9dfc044.png)
   
